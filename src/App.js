@@ -62,12 +62,20 @@ export default function App() {
             className="form__input"
             placeholder="Email"
             type="email"
+            id="email"
+            // Nueva forma con getFieldProps
+            {...formik.getFieldProps("email")}
+          ></input>
+          {/* <input
+            className="form__input"
+            placeholder="Email"
+            type="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             id="email"
             onBlur={formik.handleBlur}
-          ></input>
+          ></input> */}
 
           {formik.touched.email && formik.errors.email ? (
             <div className="form__input__error">{formik.errors.email}</div>
