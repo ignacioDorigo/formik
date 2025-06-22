@@ -1,5 +1,5 @@
-import { useFormik } from "formik";
 import React from "react";
+import { useFormik } from "formik";
 import "./App.css";
 
 export default function App() {
@@ -9,6 +9,12 @@ export default function App() {
       const errores = {};
       if (formulario.nombre.length === 0) {
         errores.nombre = "El nombre no puede estar vacío";
+      }
+      if (formulario.email.length === 0) {
+        errores.email = "El correo no puede estar vacío";
+      }
+      if (formulario.password.length === 0) {
+        errores.password = "El password no puede estar vacío";
       }
       return errores;
     },
@@ -39,8 +45,9 @@ export default function App() {
             onChange={formik.handleChange}
             id="nombre"
             onBlur={formik.handleBlur}
+            autoComplete="off"
           ></input>
-          {formik.errors.nombre ? (
+          {formik.touched.nombre && formik.errors.nombre ? (
             <div className="form__input__error">{formik.errors.nombre}</div>
           ) : null}
         </div>
@@ -48,7 +55,7 @@ export default function App() {
         {/* FIN Input */}
 
         <div className="form__campo">
-          <label className="form__label" htmlFor="nombre">
+          <label className="form__label" htmlFor="email">
             Email
           </label>
           <input
@@ -59,7 +66,12 @@ export default function App() {
             value={formik.values.email}
             onChange={formik.handleChange}
             id="email"
+            onBlur={formik.handleBlur}
           ></input>
+
+          {formik.touched.email && formik.errors.email ? (
+            <div className="form__input__error">{formik.errors.email}</div>
+          ) : null}
         </div>
         <div className="form__campo">
           <label className="form__label" htmlFor="password">
@@ -73,7 +85,11 @@ export default function App() {
             value={formik.values.password}
             onChange={formik.handleChange}
             id="password"
+            onBlur={formik.handleBlur}
           ></input>
+          {formik.touched.password && formik.errors.password ? (
+            <div className="form__input__error">{formik.errors.password}</div>
+          ) : null}
         </div>
       </div>
 
